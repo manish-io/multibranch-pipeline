@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         DOCKERHUB_CREDENTIALS = 'abc1b856-9747-4365-87a2-65d902c68afb'
-        REPO_NAME = 'manishchauhan27/my-multi-image'
+        REPO_NAME = 'manishchauhan27/my-docker-image'
     }
     stages {
         stage('Checkout') {
