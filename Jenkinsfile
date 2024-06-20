@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-        DOCKERHUB_CREDENTIALS = 'abc1b856-9747-4365-87a2-65d902c68afb'
         REPO_NAME = 'manishchauhan27/my-docker-image'
+        DOCKERHUB_CREDENTIALS = 'abc1b856-9747-4365-87a2-65d902c68afb'
     }
     stages {
         stage('Checkout') {
@@ -17,7 +17,8 @@ pipeline {
             steps {
                 script {
                     def imageTag = "${env.BRANCH_NAME}-${env.BUILD_ID}"
-                    def image = docker.build("${env.REPO_NAME}:${imageTag}")
+                    def image = docker.build("${env.REPO_NAME}:${imageTag}", '-f Dockerfile .')
+
                     docker.withRegistry('https://registry.hub.docker.com/', DOCKERHUB_CREDENTIALS) {
                         image.push()
                     }
